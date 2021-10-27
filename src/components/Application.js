@@ -33,7 +33,7 @@ export default function Application(props) {
         <hr className="sidebar__lhl sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList
-            days={days} 
+            days={days}
             day={day} 
             setDay={setDay}
           />
