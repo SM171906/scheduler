@@ -14,16 +14,13 @@ export default function DayList(props) {
       spots={props.spots}
       selected={props.name === props.value}
       setDay={props.onChange}
-    />
-
-    )
-
+    />);
+    })
     return (
       <ul>
         {dayListItems}
       </ul>
+
     );
-
-
-  });
+  
 }
