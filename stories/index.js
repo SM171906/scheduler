@@ -14,6 +14,8 @@ import Show from "components/Appointment/Show.js";
 import Confirm from "components/Appointment/Confirm.js"
 import Status from "components/Appointment/Status.js"
 import Error from "components/Appointment/Error.js"
+import Form from "components/Appointment/Form.js"
+import{ Fragment } from 'react';
 
 storiesOf("Button", module)
   .addParameters({
@@ -30,7 +32,10 @@ storiesOf("Button", module)
       Disabled
     </Button>
   ));
-storiesOf("DayListItem", module)
+
+  // DayListItem
+
+  storiesOf("DayListItem", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
   })
@@ -154,7 +159,7 @@ storiesOf("Appointment", module)
   .add("Appointment", () => <Appointment />)
   .add("Appointment with Time", () => <Appointment time="12pm" />);
 
-  storiesOf("Appointment", module)
+storiesOf("Appointment", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }]
   })
@@ -164,25 +169,53 @@ storiesOf("Appointment", module)
   .add("Empty", () => <Empty onAdd={action("onAdd")} />)
   .add("Show", () => (<Show
 
-    studen="Lydia Miller-Jones"
+    student="Lydia Miller-Jones"
     interviewer={interviewer}
     onEdit={action("onEdit")}
     onDelete={action("onDelete")}
 
   />))
-  .add ("Confirm", () => (<Confirm 
+  .add("Confirm", () => (<Confirm
     message="Delete the appointment?"
     onConfirm={action("onConfirm")}
     onCancel={action("onCancel")}
   />))
-  .add ("Status", () => (<Status
+  .add("Status", () => (<Status
     message="Deleting"
-    
-    />) )
 
-  .add ("Error", () => (
-  <Error
-   message="Could not delete appointment."
-   onClose={action("onClose")}
   />))
-  
+
+  .add("Error", () => (
+    <Error
+      message="Could not delete appointment."
+      onClose={action("onClose")}
+    />))
+  .add("Create", () => (
+    <Form
+      interviewers={interviewers}
+      onSave={action("onSave")}
+      onCancel={action("onCancel")}
+    />))
+  .add("Edit", () => (<Form
+    student="Lydia Miller-Jones"
+    value={3}
+    interviewers={interviewers}
+    onSave={action("onSave")}
+    onCancel={action("onCancel")}
+  />))
+  .add("Appointment Empty", () => (
+    <Fragment>
+      <Appointment id={1} time="4pm" />
+      <Appointment time="5pm" />
+    </Fragment>
+  ))
+  .add("Appointment Booked", () => (
+    <Fragment>
+      <Appointment
+        id={1}
+        time="4pm"
+        interview={{ student: "Lydia Miller-Jones", interviewer }}
+      />
+      <Appointment time="5pm" />
+    </Fragment>
+  ))
