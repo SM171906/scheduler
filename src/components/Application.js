@@ -6,6 +6,7 @@ import Appointment from "components/Appointment";
 import axios from 'axios';
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 import { typeParameterInstantiation } from "@babel/types";
+import useApplicationData from "hooks/useApplicationData";
 
 
 
@@ -13,16 +14,14 @@ import { typeParameterInstantiation } from "@babel/types";
 export default function Application(props) {
   // const state = { day: "Monday", days: [] };
   // setState({ ...state, day: "Tuesday" });
-  
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
-  const interviewers = getInterviewersForDay(state, state.day);
   const {
     state,
     setDay,
     bookInterview,
     cancelInterview
   } = useApplicationData();
-
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
   const parsedAppointment = dailyAppointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
     return (
@@ -36,7 +35,7 @@ export default function Application(props) {
 
   })
 
-  
+
 
 
 
