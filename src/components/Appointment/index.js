@@ -11,10 +11,6 @@ import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
 
-
-
-
-
 export default function Appointment(props) {
   const { time, interview } = props;
   const EMPTY = "EMPTY";

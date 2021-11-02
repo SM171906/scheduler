@@ -3,12 +3,14 @@ import InterviewerList from "components/InterviewerList";
 import Button from 'components/Button';
 import { useState } from 'react';
 
+
 export default function Form(props) {
-  const [student, setStudent] = useState(props.student || "");
+  const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [error, setError] = useState("");
 
   const reset = () => {
-    setStudent("")
+    setName("")
     setInterviewer("")
   }
   const cancel = () => {
@@ -16,14 +18,14 @@ export default function Form(props) {
     props.onCancel()
   }
   const save = () => {
-    props.onSave(student, interviewer);
+    props.onSave(name, interviewer);
   };
-  const validate = () => {
-    if(!interviewer || !student) {
-      alert("Please select interviewer and also write your name")
-      return
+  function validate() {
+    if (name === "") {
+      setError("Student name cannot be blank");
+      return;
     }
-    props.onSave(student,interviewer);
+    props.onSave(name, interviewer);
   }
   return (
     <main className="appointment__card appointment__card--create">
@@ -31,18 +33,21 @@ export default function Form(props) {
         <form onSubmit={event => event.preventDefault()} autoComplete="off">
           <input
             className="appointment__create-input text--semi-bold"
-            onChange={(event) => setStudent(event.target.value)}
+            onChange={(event) => setName(event.target.value)}
             name="name"
-            value={student}
+            value={name}
             type="text"
             placeholder="Enter Student Name"
+            data-testid="student-name-input"
 
           />
         </form>
+       <section className="appointment__validation">{error}</section>
         <InterviewerList
           interviewers={props.interviewers}
           value={interviewer}
           onChange={setInterviewer}
+          
         />
       </section>
       <section className="appointment__card-right">

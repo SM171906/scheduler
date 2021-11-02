@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+
 import "components/Application.scss";
 import DayList from "components/DayList.js"
 import Appointment from "components/Appointment";
